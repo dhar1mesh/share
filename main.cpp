@@ -1,103 +1,68 @@
 #include<bits/stdc++.h>
-
 using namespace std;
-int no_of_p; 
-class Person{
-    public:
-        string name;
-        string mob_no;
-        int credit;
-        vector<int> to_give;
-        vector<int> to_take;
-        virtual void details()=0;
-        virtual bool is_leader()=0;
-        virtual void setTotalAmnt(int amnt)=0;
-        Person(string name_, string mob_no_, int credit_ = 0){
-            to_give.resize(no_of_p,0);
-            to_take.resize(no_of_p,0);
-            name = name_;
-            mob_no = mob_no_;
-            credit = credit_;
-        }
-};
-class member: public Person{
-    public:
-    member(string name_, string mob_no_, int credit_ = 0):Person(name_, mob_no_, credit_ = 0){}
-    void details(){
-        cout << name << " " << mob_no << " " << credit << "\n";
+int _user(){
+    cout<<"Enter the mob_no of user\n";
+    int user;
+    cin>>user;
+    if(cout<<"user exist in database"){
+        return user;
     }
-    bool is_leader(){
-        return 0;
-    }
-    void setTotalAmnt(int val){}
-    
-};
+    return -1;
+}
+void common_group(){
+    cout<<"write sql query to show all group in which user and particular person exist\n";
+}
+void add_money(){
+    cout<<"enter the amount you want to add in particular group\n";
 
-class leader: public Person{
-    private:
-    int totalamnt;
-    public:
-    bool is_leader(){
-        return 1;
-    }
-    leader(string name_, string mob_no_, int credit_ = 0): Person(name_, mob_no_, credit_){}
-    void details(){
-        cout << name << " " << mob_no << " " << credit << " Leader\n";
-    }
-    void setTotalAmnt(int amnt=0){
-        totalamnt =  amnt;
-    }
-};
-class Trip{
-    public:
-    int expectedAmount;
-    Trip(int expamnt){
-        expectedAmount = expamnt;
-    }
+}
+void show_money(){
+    cout<<"write sql query to show remain amount in particular group\n";
 
-};
+}
+void active_group(){
+    cout<<"write sql query to show all group in which user is exist active and group is active\n";
+    add_money();
+    show_money();
+}
+void deactive_group(){
+    cout<<"write sql query to show all group in which user is exist deactive and group is active\n";
+}
+void show_contact(){
+    cout<<"write sql query to show all contact of user who are using this application\n";
+    common_group();
+}
+void show_group(){
+    cout<<"write sql query to show all group in which user is exist active and deactive both\n";
+    active_group();
+    deactive_group();
+}
+void total_amount(){
+    cout<<"write sql query to total remain amount\n";
 
+}
+void amount_group_by_group(){
+    cout<<"write sql query to show all amount remain in every active group\n";
+    add_money();
+}
+void select(){
+    cout<<"(1) show contact";
+    cout<<"(2) show group\n";
+    cout<<"(3) total amount\n";
+    cout<<"(4) amount group by group\n";
+    cout<<"(5) create a new group\n";
+    // cout<<"(1) show contact";
+    // cout<<"(1) show contact";
+    int choice;
+    cout<<"select choice\n";
+    switch(choice){
+        case 1:
+        show_contact();
+        break;
+    }
+}
 int main(){
-    cout << "Enter the number of people: ";
-    cin >> no_of_p;
-    vector<Person *> members;
-    int expamnt;
-    cin >> expamnt; 
-    Trip trip(expamnt);
-    int totalamnt = 0;
-    for(int i=0; i<no_of_p; i++){
-        // taking member details
-        cout << "Enter your Name: ";
-        string name; cin >> name;
-        cout << "Enter your Mobile Number: ";
-        string mob_no; cin >> mob_no;
-        cout << "Enter the amount you want to spend, The expected amount is: " << trip.expectedAmount<< " ";
-        int c; cin >> c; 
-        cout << "The amount left for you personally is: " << c - trip.expectedAmount << endl;
-        if(c <= trip.expectedAmount){
-            totalamnt += c;
-        }
-        else totalamnt += trip.expectedAmount;
-        cout << "Do you want to lead?(0/1): ";
-        bool isl; cin >> isl;
-        if(isl){
-            leader * p = new leader(name, mob_no, c); 
-            members.push_back(p); 
-            
-        }
-        else{
-            Person * p = new member(name, mob_no, c);
-            members.push_back(p);
-        }
-    }
-    for(int i=0; i<members.size(); i++){
-        if(members[i]->is_leader()){
-            members[i]->setTotalAmnt(totalamnt);
-        }
-        members[i]->details();
-    }
-    
-
-
-
+    int user;
+    while(user=_user()&&user==-1);
+    select();
 }
